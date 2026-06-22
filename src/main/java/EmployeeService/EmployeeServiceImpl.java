@@ -16,7 +16,9 @@ public class EmployeeServiceImpl {
 		return employeeRepo.findAll();
 	}
 	public Employee updateEmployee(Long id, Double salary) {
-		return employeeRepo.findById(id) ;
+		Employee emp = employeeRepo.findById(id).orElseThrow(()-> new RuntimeException("Employee Not found")) ;
+		emp.setSalary(salary);
+		return employeeRepo.save(emp);
 	}
 	public void deleteEmployee(Long id) {
 		 employeeRepo.deleteById(id);
